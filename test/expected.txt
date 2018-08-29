@@ -318,18 +318,10 @@
 ||
 || ===================================================
 || Enter command: || [Command entered:  edit 0 p/12345 e/valid@e.mail]
-|| Invalid command format: edit
-|| edit: Edits a person's info identified by the index number used in the last find/list call.
-|| 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
-|| 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| The person index provided is invalid
 || ===================================================
 || Enter command: || [Command entered:  edit 3 p/12345 e/valid@e.mail]
-|| Invalid command format: edit
-|| edit: Edits a person's info identified by the index number used in the last find/list call.
-|| 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
-|| 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| The person index provided is invalid
 || ===================================================
 || Enter command: || [Command entered:  edit 1 p/333333 e/betschoo@gmail.com]
 || Edited Person: Betsy Choo  Phone Number: 333333  Email: betschoo@gmail.com
