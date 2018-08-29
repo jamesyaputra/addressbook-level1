@@ -120,7 +120,7 @@ public class AddressBook {
     private static final String COMMAND_EDIT_DESC = "Edits a person's info identified by the index number used in "
                                                   + "the last find/list call.";
     private static final String COMMAND_EDIT_PARAMETER = "INDEX";
-    private static final String COMMAND_EDIT_EXAMPLE = COMMAND_EDIT_WORD + " 2";
+    private static final String COMMAND_EDIT_EXAMPLE = COMMAND_EDIT_WORD + " 2" + "p/12345678 e/janedoe@gmail.com";
 
     private static final String COMMAND_DELETE_WORD = "delete";
     private static final String COMMAND_DELETE_DESC = "Deletes a person identified by the index number used in "
@@ -509,16 +509,28 @@ public class AddressBook {
      * @return feedback display message for the operation result
      */
     private static String executeEditPerson(String commandArgs) {
-        if (!isPersonArgsValid(commandArgs)) {
+        // try decoding a person from the raw args
+        final Optional<String[]> decodeResult = decodePersonFromString(commandArgs);
+
+        // checks if args are valid (decode result will not be present if the person is invalid)
+        if (!decodeResult.isPresent()) {
             return getMessageForInvalidCommandInput(COMMAND_EDIT_WORD, getUsageInfoForEditCommand());
         }
-        final int targetVisibleIndex = extractTargetIndexFromEditPersonArgs(commandArgs);
+
+        final int targetVisibleIndex = extractTargetIndexFromPersonArgs(extractNameFromPersonString(commandArgs));
         if (!isDisplayIndexValidForLastPersonListingView(targetVisibleIndex)) {
             return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         }
+
         final String[] targetInModel = getPersonByLastVisibleIndex(targetVisibleIndex);
-        return editPersonFromAddressBook(targetInModel) ? getMessageForSuccessfulEdit(targetInModel) // success
-                : MESSAGE_PERSON_NOT_IN_ADDRESSBOOK; // not found
+        if (deletePersonFromAddressBook(targetInModel)) {
+            final String[] personToAdd = decodeResult.get();
+            personToAdd[PERSON_DATA_INDEX_NAME] = targetInModel[PERSON_DATA_INDEX_NAME];
+            addPersonToAddressBook(personToAdd);
+            return getMessageForSuccessfulEdit(personToAdd); // success
+        } else {
+            return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK; // not found
+        }
     }
 
     /**
@@ -531,7 +543,7 @@ public class AddressBook {
         if (!isPersonArgsValid(commandArgs)) {
             return getMessageForInvalidCommandInput(COMMAND_DELETE_WORD, getUsageInfoForDeleteCommand());
         }
-        final int targetVisibleIndex = extractTargetIndexFromDeletePersonArgs(commandArgs);
+        final int targetVisibleIndex = extractTargetIndexFromPersonArgs(commandArgs);
         if (!isDisplayIndexValidForLastPersonListingView(targetVisibleIndex)) {
             return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         }
@@ -561,7 +573,7 @@ public class AddressBook {
      * @param rawArgs raw command args string for the delete person command
      * @return extracted index
      */
-    private static int extractTargetIndexFromDeletePersonArgs(String rawArgs) {
+    private static int extractTargetIndexFromPersonArgs(String rawArgs) {
         return Integer.parseInt(rawArgs.trim());
     }
 
@@ -573,6 +585,17 @@ public class AddressBook {
      */
     private static boolean isDisplayIndexValidForLastPersonListingView(int index) {
         return index >= DISPLAYED_INDEX_OFFSET && index < latestPersonListingView.size() + DISPLAYED_INDEX_OFFSET;
+    }
+
+    /**
+     * Constructs a feedback message for a successful edit person command execution.
+     *
+     * @see #executeEditPerson(String)
+     * @param editedPerson successfully edited
+     * @return successful edit person feedback message
+     */
+    private static String getMessageForSuccessfulEdit(String[] editedPerson) {
+        return String.format(MESSAGE_EDIT_PERSON_SUCCESS, getMessageForFormattedPersonData(editedPerson));
     }
 
     /**
@@ -1113,6 +1136,7 @@ public class AddressBook {
         return getUsageInfoForAddCommand() + LS
                 + getUsageInfoForFindCommand() + LS
                 + getUsageInfoForViewCommand() + LS
+                + getUsageInfoForEditCommand() + LS
                 + getUsageInfoForDeleteCommand() + LS
                 + getUsageInfoForClearCommand() + LS
                 + getUsageInfoForExitCommand() + LS
