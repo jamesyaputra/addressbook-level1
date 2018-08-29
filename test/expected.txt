@@ -62,6 +62,10 @@
 || list: Displays all persons as a list with index numbers.
 || 	Example: list
 || 
+|| edit: Edits a person's info identified by the index number used in the last find/list call.
+|| 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
+|| 	Example: edit 2 p/12345678 e/janedoe@gmail.com
+|| 
 || delete: Deletes a person identified by the index number used in the last find/list call.
 || 	Parameters: INDEX
 || 	Example: delete 1
@@ -268,77 +272,77 @@
 || 
 || 2 persons found!
 || ===================================================
-|| Enter command: || [Command entered:  edit wrong args wrong args]
-|| Invalid command format: edit
+|| Enter command: || [Command entered:    edit wrong args wrong args]
+|| Invalid command format: edit 
 || edit: Edits a person's info identified by the index number used in the last find/list call.
 || 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
 || 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| 
 || ===================================================
-|| Enter command: || [Command entered:  edit 1 p/12345 valid@email.butNoPrefix]
-|| Invalid command format: edit
+|| Enter command: || [Command entered:    edit 1 p/12345 valid@email.butNoPrefix]
+|| Invalid command format: edit 
 || edit: Edits a person's info identified by the index number used in the last find/list call.
 || 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
 || 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| 
 || ===================================================
-|| Enter command: || [Command entered:  edit 1 12345 e/valid@email.butPhonePrefixMissing]
-|| Invalid command format: edit
+|| Enter command: || [Command entered:    edit 1 12345 e/valid@email.butPhonePrefixMissing]
+|| Invalid command format: edit 
 || edit: Edits a person's info identified by the index number used in the last find/list call.
 || 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
 || 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| 
 || ===================================================
-|| Enter command: || [Command entered:  edit []\[;] p/12345 e/valid@e.mail]
-|| Invalid command format: edit
+|| Enter command: || [Command entered:    edit []\[;] p/12345 e/valid@e.mail]
+|| Invalid command format: edit 
 || edit: Edits a person's info identified by the index number used in the last find/list call.
 || 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
 || 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| 
 || ===================================================
-|| Enter command: || [Command entered:  edit 1 p/not_numbers e/valid@e.mail]
-|| Invalid command format: edit
+|| Enter command: || [Command entered:    edit 1 p/not_numbers e/valid@e.mail]
+|| Invalid command format: edit 
 || edit: Edits a person's info identified by the index number used in the last find/list call.
 || 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
 || 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| 
 || ===================================================
-|| Enter command: || [Command entered:  edit 1 p/12345 e/notAnEmail]
-|| Invalid command format: edit
+|| Enter command: || [Command entered:    edit 1 p/12345 e/notAnEmail]
+|| Invalid command format: edit 
 || edit: Edits a person's info identified by the index number used in the last find/list call.
 || 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
 || 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| 
 || ===================================================
-|| Enter command: || [Command entered:  edit -1 p/12345 e/valid@e.mail]
-|| Invalid command format: edit
+|| Enter command: || [Command entered:    edit -1 p/12345 e/valid@e.mail]
+|| Invalid command format: edit 
 || edit: Edits a person's info identified by the index number used in the last find/list call.
 || 	Parameters: INDEX p/PHONE_NUMBER e/EMAIL
 || 	Example: edit 2 p/12345678 e/janedoe@gmail.com
-||
+|| 
 || ===================================================
-|| Enter command: || [Command entered:  edit 0 p/12345 e/valid@e.mail]
+|| Enter command: || [Command entered:    edit 0 p/12345 e/valid@e.mail]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: || [Command entered:  edit 3 p/12345 e/valid@e.mail]
+|| Enter command: || [Command entered:    edit 3 p/12345 e/valid@e.mail]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: || [Command entered:  edit 1 p/333333 e/betschoo@gmail.com]
+|| Enter command: || [Command entered:    edit 1 p/333333 e/betschoo@gmail.com]
 || Edited Person: Betsy Choo  Phone Number: 333333  Email: betschoo@gmail.com
 || ===================================================
-|| Enter command: || [Command entered:  list]
+|| Enter command: || [Command entered:    list]
 || 	1. Dickson Ee  Phone Number: 444444  Email: dickson@nus.edu.sg
 || 	2. Betsy Choo  Phone Number: 333333  Email: betschoo@gmail.com
-||
+|| 
 || 2 persons found!
 || ===================================================
-|| Enter command: || [Command entered:  edit 2 p/555555 e/betsbets@choo.com]
+|| Enter command: || [Command entered:    edit 2 p/555555 e/betsbets@choo.com]
 || Edited Person: Betsy Choo  Phone Number: 555555  Email: betsbets@choo.com
 || ===================================================
-|| Enter command: || [Command entered:  list]
+|| Enter command: || [Command entered:    list]
 || 	1. Dickson Ee  Phone Number: 444444  Email: dickson@nus.edu.sg
 || 	2. Betsy Choo  Phone Number: 555555  Email: betsbets@choo.com
-||
+|| 
 || 2 persons found!
 || ===================================================
 || Enter command: || [Command entered:  clear]
