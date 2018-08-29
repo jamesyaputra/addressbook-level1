@@ -21,7 +21,7 @@
   add wrong args wrong args
   add Valid Name p/12345 valid@email.butNoPrefix
   add Valid Name 12345 e/valid@email.butPhonePrefixMissing
-  
+
   # should catch invalid person data
   add []\[;] p/12345 e/valid@e.mail
   add Valid Name p/not_numbers e/valid@e.mail
@@ -90,6 +90,35 @@
   # listing indexes get updated on next request
   delete 1
   list
+
+##########################################################
+# test edit person command
+##########################################################
+
+# last active view: [1] betsy [2] dickson
+
+    # should catch invalid args format
+    edit wrong args wrong args
+    edit 1 p/12345 valid@email.butNoPrefix
+    edit 1 12345 e/valid@email.butPhonePrefixMissing
+
+    # should catch invalid person data
+    edit []\[;] p/12345 e/valid@e.mail
+    edit 1 p/not_numbers e/valid@e.mail
+    edit 1 p/12345 e/notAnEmail
+
+    # should catch invalid index
+    edit -1 p/12345 e/valid@e.mail
+    edit 0 p/12345 e/valid@e.mail
+    edit 3 p/12345 e/valid@e.mail
+
+    # edits appropriately based on last find command index
+    edit 1 p/333333 e/betschoo@gmail.com
+    list
+
+    # edits correct person after new listing index
+    edit 2 p/555555 e/betsbets@choo.com
+    list
 
 ##########################################################
 # test clear command

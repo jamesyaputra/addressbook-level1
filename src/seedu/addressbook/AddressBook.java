@@ -119,8 +119,10 @@ public class AddressBook {
     private static final String COMMAND_EDIT_WORD = "edit";
     private static final String COMMAND_EDIT_DESC = "Edits a person's info identified by the index number used in "
                                                   + "the last find/list call.";
-    private static final String COMMAND_EDIT_PARAMETER = "INDEX";
-    private static final String COMMAND_EDIT_EXAMPLE = COMMAND_EDIT_WORD + " 2" + "p/12345678 e/janedoe@gmail.com";
+    private static final String COMMAND_EDIT_PARAMETERS = "INDEX "
+                                                        + PERSON_DATA_PREFIX_PHONE + "PHONE_NUMBER "
+                                                        + PERSON_DATA_PREFIX_EMAIL + "EMAIL";
+    private static final String COMMAND_EDIT_EXAMPLE = COMMAND_EDIT_WORD + " 2 p/12345678 e/janedoe@gmail.com";
 
     private static final String COMMAND_DELETE_WORD = "delete";
     private static final String COMMAND_DELETE_DESC = "Deletes a person identified by the index number used in "
@@ -1160,7 +1162,7 @@ public class AddressBook {
     /** Returns the string for showing 'edit' command usage instruction */
     private static String getUsageInfoForEditCommand() {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_EDIT_WORD, COMMAND_EDIT_DESC) + LS
-                + String.format(MESSAGE_COMMAND_HELP_PARAMETERS, COMMAND_EDIT_PARAMETER) + LS
+                + String.format(MESSAGE_COMMAND_HELP_PARAMETERS, COMMAND_EDIT_PARAMETERS) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_EDIT_EXAMPLE) + LS;
     }
 
